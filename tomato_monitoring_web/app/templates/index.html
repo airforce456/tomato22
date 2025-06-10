@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>番茄大棚监控系统</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- 引入Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <!-- 引入JSMpeg视频播放器 -->
+    <script src="{{ url_for('static', filename='jsmpeg.min.js') }}"></script>
+</head>
+<body>
+    <!-- 头部 -->
+    <header class="header"></header>
+        <h1>番茄大棚监控系统</h1>
+        <div class="connection-info">
+            <span id="status-indicator" class="status-indicator status-offline"></span>
+            <span id="connection-status">未连接</span> | 
+            <span>当前时间: <span id="current-time">--</span></span> | 
+            <span>最后更新: <span id="last-update-time">未连接</span></span>
+        </div>
+    </header>
+
+    <!-- 主容器 -->
+    <div class="container">
+        <!-- 警告区域 -->
+        <div id="alerts-container"></div>
+
+        <!-- 视频流和实时数据 -->
+        <div class="grid">
+            <!-- 视频流卡片 -->
+            <div class="card">
+                <div class="card-header">实时监控</div>
+                <div class="video-container">
+                    <canvas id="video-canvas"></canvas>
+                </div>
+            </div>
+
+            <!-- 实时数据卡片 -->
+            <div class="card">
+                <div class="card-header">环境数据</div>
+                <div class="data-item">
+                    <span class="data-label">温度</span>
+                    <span id="temperature-value" class="data-value">-- °C</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label">湿度</span>
+                    <span id="humidity-value" class="data-value">-- %</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label">光照</span>
+                    <span id="light-value" class="data-value">-- lux</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label">土壤湿度</span>
+                    <span id="soil-moisture-value" class="data-value">-- %</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label">CO2浓度</span>
+                    <span id="co2-value" class="data-value">-- ppm</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 图表区域 -->
+        <h2 class="section-title">历史数据趋势</h2>
+        <div class="grid">
+            <!-- 温度图表 -->
+            <div class="card">
+                <div class="card-header">温度趋势</div>
+                <div class="chart-container">
+                    <canvas id="temperature-chart"></canvas>
+                </div>
+            </div>
+
+            <!-- 湿度图表 -->
+            <div class="card">
+                <div class="card-header">湿度趋势</div>
+                <div class="chart-container">
+                    <canvas id="humidity-chart"></canvas>
+                </div>
+            </div>
+
+            <!-- 光照图表 -->
+            <div class="card">
+                <div class="card-header">光照趋势</div>
+                <div class="chart-container">
+                    <canvas id="light-chart"></canvas>
+                </div>
+            </div>
+
+            <!-- 土壤湿度图表 -->
+            <div class="card">
+                <div class="card-header">土壤湿度趋势</div>
+                <div class="chart-container">
+                    <canvas id="soil-moisture-chart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- 系统信息 -->
+        <div class="card">
+            <div class="card-header">系统信息</div>
+            <p>本系统实时监控番茄大棚环境参数，包括温度、湿度、光照、土壤湿度和CO2浓度。</p>
+            <p>适宜的番茄生长环境：</p>
+            <ul>
+                <li>温度：20-30°C（白天），15-20°C（夜间）</li>
+                <li>湿度：50-70%</li>
+                <li>光照：每天至少6小时直射阳光</li>
+                <li>土壤湿度：保持湿润但不过湿</li>
+                <li>CO2浓度：800-1200ppm（提高产量）</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="header">
+        <p>番茄大棚监控系统 &copy; 2023</p>
+    </footer>
+
+    <!-- 引入主脚本 -->
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>
